@@ -1,14 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { CREATE_EVENT, DELETE_ALL_EVENT } from '../actions'
 
-const EventForm = ({state, dispatch}) => {
+const EventForm = ({ state, dispatch }) => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  
+
   const addEvent = (e) => {
     e.preventDefault()
     console.log("addEvent")
     dispatch({
-      type: 'CREATE_EVENT',
+      type: CREATE_EVENT,
       title, body
     })
     setTitle('')
@@ -17,13 +18,13 @@ const EventForm = ({state, dispatch}) => {
   const deleteALlEvents = e => {
     e.preventDefault()
     const result = window.confirm('全てのイベントを削除します。よろしいですか？')
-    if (result){
-      dispatch({ type: 'DELETE_ALL_EVENT'})
+    if (result) {
+      dispatch({ type: DELETE_ALL_EVENT })
     }
   }
   const unCreatable = title === '' || body === ''
 
-  
+
   return (
     <React.Fragment>
       <h4>イベント作成フォーム</h4>
