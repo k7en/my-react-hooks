@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
-import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../actions'
+import { CREATE_EVENT, DELETE_ALL_EVENTS, ADD_OPERATION_LOG, DELETE_ALL_OPERATION_LOGS } from '../actions'
 
 import AppContext from '../contexts/AppContext'
+import { timeCurrentIso8601 } from '../util'
 
 const EventForm = () => {
-  const {state, dispatch} = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
 
@@ -15,6 +16,11 @@ const EventForm = () => {
       type: CREATE_EVENT,
       title, body
     })
+    dispatch({
+      type: ADD_OPERATION_LOG,
+      description: 'イベントを作成しました',
+      operatedAt: timeCurrentIso8601()
+    })
     setTitle('')
     setBody('')
   }
@@ -23,6 +29,11 @@ const EventForm = () => {
     const result = window.confirm('全てのイベントを削除します。よろしいですか？')
     if (result) {
       dispatch({ type: DELETE_ALL_EVENTS })
+      dispatch({
+        type: DELETE_ALL_OPERATION_LOGS,
+        description: '全てのイベントを作成しました',
+        operatedAt: timeCurrentIso8601()
+      })
     }
   }
   const unCreatable = title === '' || body === ''
