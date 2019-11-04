@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { CREATE_EVENT, DELETE_ALL_EVENT } from '../actions'
+import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../actions'
 
 import AppContext from '../contexts/AppContext'
 
@@ -22,7 +22,7 @@ const EventForm = () => {
     e.preventDefault()
     const result = window.confirm('全てのイベントを削除します。よろしいですか？')
     if (result) {
-      dispatch({ type: DELETE_ALL_EVENT })
+      dispatch({ type: DELETE_ALL_EVENTS })
     }
   }
   const unCreatable = title === '' || body === ''

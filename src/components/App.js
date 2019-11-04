@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import reducer from '../reducers/events'
+import reducer from '../reducers'
 
 import AppContext from '../contexts/AppContext'
 
